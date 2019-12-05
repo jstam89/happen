@@ -6,7 +6,7 @@
     <div class="card-body">
         <div>
             <div class="result"></div>
-            <button type="submit" class="btn btn-block btn-primary">{{ __('Cart') }}</button>
+            <button type="submit" class="btn btn-block btn-primary">{{ __('Bestellens') }}</button>
         </div>
     </div>
 </div>
