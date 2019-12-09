@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Menu;
-use Carbon\Carbon;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\View\View;
 
@@ -15,9 +14,7 @@ class PageController extends Controller
      */
     public function home() //get record of tomorrow for ordering
     {
-        $menus = Menu::whereDate('takeout_date', '>', Carbon::now())
-                     ->orderBy('takeout_date', 'asc')
-                     ->get();
+        $menus = Menu::orderBy('id', 'asc')->get();
 
         return view('order.index')->with('menus', $menus);
     }

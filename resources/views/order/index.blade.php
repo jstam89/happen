@@ -10,7 +10,7 @@
                     <div class="card-header ">
                         <div class="row">
                             <div class="col-sm-6 text-left">
-                                <h5 class="card-category">{{$menu->takeout_date}}</h5>
+                                <h5 class="card-category menu-date">{{$menu->takeout_date}}</h5>
                                 <h2 class="card-title menu-title">{{$menu->title}}</h2>
                             </div>
                         </div>
@@ -67,25 +67,41 @@
             const button = event.target;
             const menuItem = button.parentElement.parentElement.parentElement;
             const title = menuItem.getElementsByClassName('menu-title')[0].innerHTML;
-            addItemToCart(title)
+            const date = menuItem.getElementsByClassName('menu-date')[0].innerHTML;
+            addItemToCart(title, date)
         }
 
-        function addItemToCart(title) {
-            var cartRow = document.createElement('td');
-            cartRow.innerText = title;
-            //TODO: add item to cart function
-
+        function addItemToCart(title, date) {
+            const cartRow = document.createElement('tr');
+            cartRow.classList.add('cart-row');
+            const cartItems = document.getElementsByClassName('cart-items')[0];
+            const cartItemTitle = document.getElementsByClassName('cart-item-title');
+            for (let i = 0; i < cartItemTitle.length; i++) {
+                if (cartItemTitle[i].innerText === title) {
+                    alert('menu is al aanwezig');
+                    return;
+                }
+            }
+            cartRow.innerHTML = `
+            <tr>
+                <td class="cart-item-title">
+                <input type="hidden" value="${title}" name="item[]">${title}</td>
+                <td><select name="quantity[${title}]">
+                        <?php for ($i = 1; $i <= 10; $i++) : ?>
+            <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                        <?php endfor; ?>
+            </select>
+                </td>
+                <td>
+        <a id="cart-item-delete" class="btn btn-sm btn-icon cart-delete" href="#" role="button">
+        <i class="fas fa-times"></i></a>
+                </td>
+              </tr>
+`;
+            cartItems.append(cartRow);
+            cartRow.getElementsByClassName('cart-delete')[0].addEventListener('click', removeCartItem);
         }
 
-
-        // function addToCart(event) {
-        //     var button = event.target;
-        //     const menuItem = button.parentElement.parentElement;
-        //     const title = menuItem.getElementsByClassName('menu-title');
-        //     console.log(title);
-        // }
-        //
-        // addToCart();
     </script>
 
 

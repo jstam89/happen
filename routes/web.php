@@ -27,20 +27,9 @@ Route::get('/home', 'HomeController@index')
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('menus', 'MenuController');
 
-    Route::get('order',
-        [
-            'as'   => 'order.home',
-            'uses' => 'PageController@home'
-        ]);
-    Route::get('reviews',
-        [
-            'as'   => 'order.review',
-            'uses' => 'PageController@review'
-        ]);
     Route::get('/menus', 'PageController@menus')
          ->name('menus')
          ->middleware('auth');
-
 });
 
 Route::group(['middleware' => 'auth'], function () {
@@ -60,6 +49,21 @@ Route::group(['middleware' => 'auth'], function () {
         [
             'as'   => 'profile.password',
             'uses' => 'ProfileController@password'
+        ]);
+});
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::resource('order', 'OrderController');
+
+    Route::get('order',
+        [
+            'as'   => 'order.home',
+            'uses' => 'PageController@home'
+        ]);
+    Route::get('reviews',
+        [
+            'as'   => 'order.review',
+            'uses' => 'PageController@review'
         ]);
 });
 
