@@ -1,7 +1,7 @@
 ---
 name: New feature
 about: Feature description and acceptation criteria
-title: Featuree
+title: Feature
 labels: ''
 assignees: ''
 
