@@ -20,18 +20,23 @@
                     <div class="">
                         <table class="table tablesorter " id="">
                             <thead class=" text-primary">
+                            <th scope="col">{{ __('Id') }}</th>
                             <th scope="col">{{ __('Name') }}</th>
                             <th scope="col">{{ __('Email') }}</th>
-                            <th scope="col">{{ __('Creation Date') }}</th>
+                            <th scope="col">{{ __('Functie') }}</th>
+                            <th scope="col">{{ __('geregistreerd') }}</th>
                             <th scope="col"></th>
                             </thead>
                             <tbody>
                             @foreach ($users as $user)
                                 <tr>
+                                    <td>{{ $user->id }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>
                                         <a href="mailto:{{ $user->email }}">{{ $user->email }}</a>
                                     </td>
+                                    <td>{{ $user->role }}</td>
+
                                     <td>{{ $user->created_at->format('d/m/Y H:i') }}</td>
                                     <td class="text-right">
                                         <div class="dropdown">

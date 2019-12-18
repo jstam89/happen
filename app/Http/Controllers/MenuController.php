@@ -7,25 +7,10 @@ use App\Menu;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
-use Illuminate\View\View;
 
 
 class MenuController extends Controller
 {
-
-    /**
-     * Show the application menus.
-     *
-     * @return View
-     */
-    public function index(): View
-    {
-
-        $menus = Menu::orderBy('id', 'desc')->get();
-
-        return view('order.create.menus')->with('menus', $menus);
-
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -64,41 +49,18 @@ class MenuController extends Controller
             $fileNameToStore = 'noimage.jpg';
         }
 
-        $inputdate  = $request->input('takeout_date');
-        $formatdate = date('dd-mm-YYYY', $inputdate);
 
         $menu               = new Menu;
         $menu->title        = $request->input('title');
         $menu->info         = $request->input('info');
+        $menu->takeout_date = $request->input('takeout_date');
         $menu->menu_image   = $fileNameToStore;
-        $menu->takeout_date = $formatdate;
 
         $menu->save();
 
         return redirect('/menus')->withStatus('success', 'Menu Toegevoegd');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return void
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**i
-     * Display the specified resource.
-     *
-     * @param int $id
-     *
-     * @return void
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -107,10 +69,8 @@ class MenuController extends Controller
      *
      * @return void
      */
-    public
-    function edit(
-        $id
-    ): void {
+    public function edit($id)
+    {
         //
     }
 
@@ -122,11 +82,8 @@ class MenuController extends Controller
      *
      * @return Response
      */
-    public
-    function update(
-        Request $request,
-        $id
-    ) {
+    public function update(Request $request, $id)
+    {
         //
     }
 
@@ -137,10 +94,8 @@ class MenuController extends Controller
      *
      * @return Response
      */
-    public
-    function destroy(
-        $id
-    ) {
+    public function destroy($id)
+    {
         //
     }
 }

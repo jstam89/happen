@@ -1,5 +1,9 @@
 <div class="card ">
     <div class="card-header">
+        <button type="submit"
+                class="btn btn-icon btn-sm pull-right ">
+            <i class="fas fa-list"></i>
+        </button>
         <h4 class="card-title">Nieuwe gebruikers</h4>
     </div>
     <div class="card-body">

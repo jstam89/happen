@@ -6,14 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    public static function where(string $string, string $string1, $id)
-    {
-    }
-    
-    public static function find(int $int)
-    {
-    }
-    
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable
+        = [
+            'menu_id',
+            'user_id',
+        ];
+
     public function users()
     {
         return $this->belongsToMany(User::class, 'user_id');

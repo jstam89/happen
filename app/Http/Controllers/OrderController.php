@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Order;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -31,27 +34,46 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      *
-     * @return \Illuminate\Http\Response
+     * @return void
      */
     public function store(Request $request)
     {
+        $orders = $request->input('cart');
 
-        $order = $request->input();
-        dd($order);
+        if ( ! $orders) {
 
+            return redirect('/order')->withStatus('Geen menu geselecteerd');
+
+        }
+
+        foreach ($orders as $product) {
+
+            $order             = new Order();
+            $order->menu_id    = $product['menu_id'];
+            $order->quantity   = $product['quantity'];
+            $order->user_id    = $request->user()->id;
+            $order->ordered_at = Carbon::now();
+
+            $order->save();
+        }
+
+        return redirect('/order')->withStatus('Uw menu is besteld');
     }
+
 
     /**
      * Display the specified resource.
      *
      * @param int $id
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function show($id)
-    {
+    public
+    function show(
+        $id
+    ) {
         //
     }
 
@@ -60,35 +82,42 @@ class OrderController extends Controller
      *
      * @param int $id
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function edit($id)
-    {
-        //
+    public
+    function edit(
+        $id
+    ) {
+
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int                      $id
+     * @param Request $request
+     * @param int     $id
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function update(Request $request, $id)
-    {
+    public
+    function update(
+        Request $request,
+        $id
+    ) {
         //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
+     * @param $id
      *
-     * @return \Illuminate\Http\Response
+     * @return void
      */
-    public function destroy($id)
-    {
-        //
+    public
+    function destroy(
+        $id
+    ) {
+        dd($menu->id);
     }
 }

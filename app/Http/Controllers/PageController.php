@@ -12,15 +12,13 @@ class PageController extends Controller
     /**
      * @return Factory|View
      */
-    public function home() //get record of tomorrow for ordering
+    public function home()
     {
-        $menus = Menu::orderBy('id', 'asc')->get();
-
-        return view('order.index')->with('menus', $menus);
+        //
     }
 
     /**
-     * Display reviews page
+     * Display menus page
      *
      * @return View
      */
@@ -32,67 +30,33 @@ class PageController extends Controller
     }
 
     /**
+     * @return Factory|View
+     */
+    public function order()
+    {
+        $menus = Menu::orderBy('id', 'asc')->get();
+
+        return view('order.index')->with('menus', $menus);
+    }
+
+    /**
      * Display reviews page
      *
      * @return View
      */
-    public function review()
+    public function overview()
     {
-        return view('order.reviews');
+        return view('order.overview');
     }
 
     /**
-     * Display tables page
+     * Display reservation page
      *
      * @return View
      */
-    public
-    function tables()
+    public function reservation()
     {
-        return view('pages.tables');
+        return view('reservation.submit');
     }
 
-    /**
-     * Display notifications page
-     *
-     * @return View
-     */
-    public
-    function notifications()
-    {
-        return view('pages.notifications');
-    }
-
-    /**
-     * Display rtl page
-     *
-     * @return View
-     */
-    public
-    function rtl()
-    {
-        return view('pages.rtl');
-    }
-
-    /**
-     * Display typography page
-     *
-     * @return View
-     */
-    public
-    function typography()
-    {
-        return view('pages.typography');
-    }
-
-    /**
-     * Display upgrade page
-     *
-     * @return View
-     */
-    public
-    function upgrade()
-    {
-        return view('pages.upgrade');
-    }
 }

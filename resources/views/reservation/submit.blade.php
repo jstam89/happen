@@ -1,26 +1,43 @@
-@extends('layouts.app', ['pageSlug' => 'menus'])
+@extends('layouts.app', ['pageSlug' => 'reservation'])
 
 @section('content')
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="title">{{ __('Tafel reserveren') }}</h5>
+                </div>
+
+                <div class="card-body">
+                    <p>gebruikers details hier</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="title">{{ __('Daghap Toevoegen') }}</h5>
+                    <h5 class="title">{{ __('Tafel reserveren') }}</h5>
                 </div>
-                <form method="post" enctype="multipart/form-data" action="{{ route('menus.store') }}"
+                <form method="post" enctype="multipart/form-data" action="#"
                       autocomplete="off">
                     <div class="card-body">
                         @csrf
 
                         @include('alerts.success')
 
+                        <p>{{auth()->user()->name}}</p>
+
                         <div class="form-group{{ $errors->has('title') ? ' has-danger' : '' }}">
-                            <label>{{ __('Titel') }}</label>
+                            <label>{{ __('Naam') }}</label>
                             <input type="text" name="title"
                                    class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}"
-                                   placeholder="{{ __('Vul een titel in') }}"
-                                   value="">
+                                   placeholder="{{ __('Name') }}"
+                                   value="{{ old('name', auth()->user()->name) }}">
                             @include('alerts.feedback', ['field' => 'title'])
                         </div>
 
@@ -51,36 +68,29 @@
         <div class="col-md-4">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="title">{{ __('Menu Overzicht') }}</h5>
+                    <h5 class="title">{{ __('Bestel historie') }}</h5>
                 </div>
                 <div class="card-body">
                     <table class="table" id="">
                         <thead class=" text-primary">
-                        <th scope="col">Daghap</th>
-                        <th scope="col">Ophaaldag</th>
+                        <th scope="col">{{ __('Order ID') }}</th>
+                        <th scope="col">{{ __('Menu ID') }}</th>
+                        <th scope="col">{{ __('Besteld op') }}</th>
                         </thead>
                         <tbody>
-                        @foreach($menus as $menu)
 
-                            <tr>
-                                <td>{{ $menu->title }}</td>
-                                <td>{{ $menu->takeout_date }}</td>
-                                <td>
-                                    <div class="dropdown">
-                                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
-                                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v"></i>
-                                        </a>
-                                    </div>
-                                </td>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
 
-                            </tr>
-                        @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
-@endsection
 
+
+@endsection

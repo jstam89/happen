@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use Notifiable;
-    
+
     /**
      * The attributes that are mass assignable.
      *
@@ -22,7 +22,7 @@ class User extends Authenticatable
             'role',
             'password',
         ];
-    
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -33,7 +33,7 @@ class User extends Authenticatable
             'password',
             'remember_token',
         ];
-    
+
     /**
      * The attributes that should be cast to native types.
      *
@@ -44,9 +44,13 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
         ];
     
+    private $password;
+    private $email;
+    private $name;
+
     public function orders()
     {
         return $this->hasMany(Order::class);
     }
-    
+
 }

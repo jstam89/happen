@@ -4,7 +4,6 @@
 
     <div class="row">
         <div class="col-md-7">
-
             @foreach($menus as $menu)
                 <div class="card menu-item">
                     <div class="card-header ">
@@ -12,6 +11,7 @@
                             <div class="col-sm-6 text-left">
                                 <h5 class="card-category menu-date">{{$menu->takeout_date}}</h5>
                                 <h2 class="card-title menu-title">{{$menu->title}}</h2>
+                                <span class="card menu-id" style="display: none;">{{$menu->id}}</span>
                             </div>
                         </div>
                     </div>
@@ -32,7 +32,7 @@
         </div>
 
         <div class="col-md-5">
-            @include('partials.cart')
+            @include('layouts.cart')
         </div>
     </div>
 
@@ -45,48 +45,53 @@
         }
 
         function ready() {
-            const removeCartItemButton = document.getElementsByClassName('cart-delete');
+            let removeCartItemButton = document.getElementsByClassName('cart-delete');
             for (let i = 0; i < removeCartItemButton.length; i++) {
-                const button = removeCartItemButton[i];
+                let button = removeCartItemButton[i];
                 button.addEventListener('click', removeCartItem);
             }
 
-            const addToCartButton = document.getElementsByClassName('add-to-cart');
+            let addToCartButton = document.getElementsByClassName('add-to-cart');
             for (let i = 0; i < addToCartButton.length; i++) {
-                const button = addToCartButton[i];
+                let button = addToCartButton[i];
                 button.addEventListener('click', addToCartClicked);
             }
         }
 
         function removeCartItem(event) {
-            const buttonClicked = event.target;
+            let buttonClicked = event.target;
             buttonClicked.parentElement.parentElement.parentElement.remove();
         }
 
+        innerHTML = sessionStorage.getItem("lastname");
+
         function addToCartClicked(event) {
-            const button = event.target;
-            const menuItem = button.parentElement.parentElement.parentElement;
-            const title = menuItem.getElementsByClassName('menu-title')[0].innerHTML;
-            const date = menuItem.getElementsByClassName('menu-date')[0].innerHTML;
-            addItemToCart(title, date)
+            let button = event.target;
+            let menuItem = button.parentElement.parentElement.parentElement;
+            let menuid = menuItem.getElementsByClassName('menu-id')[0].innerHTML;
+            let title = menuItem.getElementsByClassName('menu-title')[0].innerHTML;
+            let takeout = menuItem.getElementsByClassName('menu-date')[0].innerHTML;
+            addItemToCart(menuid, title, takeout)
         }
 
-        function addItemToCart(title, date) {
-            const cartRow = document.createElement('tr');
+        function addItemToCart(menuid, title, takeout) {
+            let cartRow = document.createElement('tr');
             cartRow.classList.add('cart-row');
-            const cartItems = document.getElementsByClassName('cart-items')[0];
-            const cartItemTitle = document.getElementsByClassName('cart-item-title');
+            let cartItems = document.getElementsByClassName('cart-items')[0];
+            let cartItemTitle = document.getElementsByClassName('cart-item-title');
             for (let i = 0; i < cartItemTitle.length; i++) {
                 if (cartItemTitle[i].innerText === title) {
                     alert('menu is al aanwezig');
                     return;
                 }
             }
+
             cartRow.innerHTML = `
             <tr>
-                <td class="cart-item-title">
-                <input type="hidden" value="${title}" name="item[]">${title}</td>
-                <td><select name="quantity[${title}]">
+               <td class="cart-item-title">
+                <input type="hidden" value="${title}" name="cart[${cartItemTitle.length}][product_name]]">${title}
+                </td>
+                <td><select name="cart[${cartItemTitle.length}][quantity]]">
                         <?php for ($i = 1; $i <= 10; $i++) : ?>
             <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
                         <?php endfor; ?>
@@ -96,10 +101,16 @@
         <a id="cart-item-delete" class="btn btn-sm btn-icon cart-delete" href="#" role="button">
         <i class="fas fa-times"></i></a>
                 </td>
-              </tr>
+                <td>
+                    <input type="hidden" id="${takeout}" name="cart[${cartItemTitle.length}][takeout_date]]" value="${takeout}">
+                   <input type="hidden" id="${menuid}" name="cart[${cartItemTitle.length}][menu_id]]" value="${menuid}">
+
+                </td>
+               </tr>
 `;
             cartItems.append(cartRow);
             cartRow.getElementsByClassName('cart-delete')[0].addEventListener('click', removeCartItem);
+
         }
 
     </script>

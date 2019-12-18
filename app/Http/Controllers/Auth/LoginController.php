@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Laravel\Socialite\Facades\Socialite;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -52,6 +53,29 @@ class LoginController extends Controller
     public function handleProviderCallback()
     {
         $user = Socialite::driver('graph')->user();
-        dd($user);
+
+        $name  = $user['displayName'];
+        $email = $user['userPrincipalName'];
+        $id    = $user['id'];
+
+        // check if they're an existing user
+        $existingUser = User::where('email', $email)->first();
+
+        if ($existingUser) {
+            auth()->login($existingUser, true);
+
+        } else {
+            // create a new user
+            $User           = new User;
+            $User->name     = $name;
+            $User->email    = $email;
+            $User->password = $id;
+            $User->save();
+            auth()->login($User, true);
+        }
+
+        return redirect()->to('/home');
     }
+
+
 }

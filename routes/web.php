@@ -58,17 +58,27 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('order',
         [
             'as'   => 'order.home',
-            'uses' => 'PageController@home'
+            'uses' => 'PageController@order'
         ]);
-    Route::get('reviews',
+    Route::get('overview',
         [
-            'as'   => 'order.review',
-            'uses' => 'PageController@review'
+            'as'   => 'order.overview',
+            'uses' => 'PageController@overview'
         ]);
+    Route::get('menu',
+        [
+            'as'   => 'menu.destroy',
+            'uses' => 'MenuController@destroy'
+        ]);
+    Route::get('reservation',
+        [
+            'as'   => 'reservation.submit',
+            'uses' => 'PageController@reservation'
+        ]);
+
 });
 
 //Microsoft Graph Auth
-
 Route::post('/oauth',
     [
         'as'   => 'oauth.register',
@@ -82,17 +92,6 @@ Route::get('/oauth/callback',
     ]);
 
 
-Route::get('maps', ['as' => 'pages.maps', 'uses' => 'PageController@maps']);
-Route::get('notifications', [
-    'as'   => 'pages.notifications',
-    'uses' => 'PageController@notifications'
-]);
-Route::get('rtl', ['as' => 'pages.rtl', 'uses' => 'PageController@rtl']);
-Route::get('tables',
-    ['as' => 'pages.tables', 'uses' => 'PageController@tables']);
-Route::get('typography',
-    ['as' => 'pages.typography', 'uses' => 'PageController@typography']);
-Route::get('upgrade',
-    ['as' => 'pages.upgrade', 'uses' => 'PageController@upgrade']);
+
 
 

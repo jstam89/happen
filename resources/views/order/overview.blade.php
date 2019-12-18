@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-    <h1>Geef review</h1>
+    <h1>Order overzicht</h1>
 
 
 @endsection
