@@ -2,33 +2,38 @@
 
 namespace App\Http\Controllers;
 
+use App\Menu;
 use App\Order;
 use Carbon\Carbon;
+use Exception;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\View\View;
 
 class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return Factory|View
      */
     public function index()
     {
-        //
+        $menus = Menu::orderBy('id', 'asc')->get();
+
+        return view('order.index')->with('menus', $menus);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @param Request $request
      *
-     * @return void
+     * @return Factory|View
      */
-    public function create(Request $request)
+    public function create()
     {
-
+        //
     }
 
     /**
@@ -66,15 +71,16 @@ class OrderController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param int $id
-     *
-     * @return Response
+     * @return Factory|View
+     * @throws Exception
      */
-    public
-    function show(
-        $id
-    ) {
-        //
+    public function show()
+    {
+
+
+        $orders = Order::all();
+
+        return view('order.overview')->with('orders', $orders);
     }
 
     /**
@@ -84,11 +90,9 @@ class OrderController extends Controller
      *
      * @return Response
      */
-    public
-    function edit(
-        $id
-    ) {
-
+    public function edit($id)
+    {
+        //
     }
 
     /**
@@ -120,4 +124,5 @@ class OrderController extends Controller
     ) {
         dd($menu->id);
     }
+
 }

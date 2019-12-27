@@ -1,4 +1,4 @@
-@extends('layouts.app', ['pageSlug' => 'order'])
+@extends('layouts.app', ['pageSlug' => 'order.index'])
 
 @section('content')
 
@@ -91,7 +91,7 @@
                <td class="cart-item-title">
                 <input type="hidden" value="${title}" name="cart[${cartItemTitle.length}][product_name]]">${title}
                 </td>
-                <td><select name="cart[${cartItemTitle.length}][quantity]]">
+                <td><select class="form-control" style="background-color:#27293d;" name="cart[${cartItemTitle.length}][quantity]]">
                         <?php for ($i = 1; $i <= 10; $i++) : ?>
             <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
                         <?php endfor; ?>

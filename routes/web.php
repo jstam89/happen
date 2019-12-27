@@ -24,14 +24,24 @@ Route::get('/home', 'HomeController@index')
      ->name('home')
      ->middleware('auth');
 
+
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('menus', 'MenuController');
 
-    Route::get('/menus', 'PageController@menus')
-         ->name('menus')
-         ->middleware('auth');
+    Route::get('/menus',
+        [
+            'as'   => 'menus.create',
+            'uses' => 'MenuController@create'
+        ]);
+
+    Route::get('menu',
+        [
+            'as'   => 'menu.destroy',
+            'uses' => 'MenuController@destroy'
+        ]);
 });
 
+//User routes
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('user', 'UserController');
 
@@ -58,22 +68,29 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('order',
         [
             'as'   => 'order.home',
-            'uses' => 'PageController@order'
+            'uses' => 'OrderController@index'
         ]);
-    Route::get('overview',
+    Route::get('orders/overview',
         [
             'as'   => 'order.overview',
-            'uses' => 'PageController@overview'
+            'uses' => 'OrderController@show'
         ]);
-    Route::get('menu',
-        [
-            'as'   => 'menu.destroy',
-            'uses' => 'MenuController@destroy'
-        ]);
+
+});
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::resource('reservation', 'ReservationController');
+
     Route::get('reservation',
         [
-            'as'   => 'reservation.submit',
-            'uses' => 'PageController@reservation'
+            'as'   => 'reservation.index',
+            'uses' => 'ReservationController@index'
+        ]);
+
+    Route::post('reservation/submit',
+        [
+            'as'   => 'reservation.create',
+            'uses' => 'ReservationController@create'
         ]);
 
 });
@@ -90,8 +107,5 @@ Route::get('/oauth/callback',
         'as'   => 'oauth.callback',
         'uses' => 'Auth\LoginController@handleProviderCallback'
     ]);
-
-
-
 
 

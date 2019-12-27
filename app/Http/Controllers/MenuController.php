@@ -4,13 +4,27 @@ namespace App\Http\Controllers;
 
 
 use App\Menu;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 
 
 class MenuController extends Controller
 {
+    /**
+     * Show the form for creating a new resource.
+     *
+     *
+     * @return Factory|View
+     */
+    public function create()
+    {
+        $menus = Menu::orderBy('id', 'asc')->get();
+
+        return view('order.create.menus')->with('menus', $menus);
+    }
 
     /**
      * Store a newly created resource in storage.
