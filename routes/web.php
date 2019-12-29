@@ -70,6 +70,7 @@ Route::group(['middleware' => 'auth'], function () {
             'as'   => 'order.home',
             'uses' => 'OrderController@index'
         ]);
+
     Route::get('orders/overview',
         [
             'as'   => 'order.overview',

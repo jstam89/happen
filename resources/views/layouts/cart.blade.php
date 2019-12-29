@@ -7,6 +7,7 @@
         <div class="card-body">
             @include('alerts.success')
 
+
             <table class="table table-borderless" id="cartTable">
                 <thead>
                 <th>Menu</th>

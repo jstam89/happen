@@ -92,7 +92,7 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-        //
+        die('order met id: ' . $id . ' aanpassen');
     }
 
     /**
@@ -118,11 +118,9 @@ class OrderController extends Controller
      *
      * @return void
      */
-    public
-    function destroy(
-        $id
-    ) {
-        dd($menu->id);
+    public function destroy($id)
+    {
+        die('order met id: ' . $id . ' verwijderen');
     }
 
 }
