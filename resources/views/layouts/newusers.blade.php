@@ -12,14 +12,14 @@
                 <thead class=" text-primary">
                 <th scope="col">{{ __('Naam') }}</th>
                 <th scope="col">{{ __('Email') }}</th>
-                <th scope="col">{{ __('Creation Date') }}</th>
+                <th scope="col">{{ __('Geregistreerd') }}</th>
                 </thead>
                 <tbody>
                 @foreach ($users->take(5) as $user)
                     <tr>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
-                        <td>{{ $user->created_at->format('d/m/Y H:i') }}</td>
+                        <td>{{ $user->created_at->format('d-m-Y') }}</td>
 
                     </tr>
                 @endforeach

@@ -48,6 +48,7 @@
                                    value="{{ old('info', auth()->user()->info) }}">
                             @include('alerts.feedback', ['field' => 'info'])
                         </div>
+
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-fill btn-primary">{{ __('Save') }}</button>
@@ -146,12 +147,39 @@
                             <td>{{ $order->id }}</td>
                             <td>{{ $order->menu_id }}</td>
                             <td>{{ $order->ordered_at }}</td>
+                            <td class="text-right">
+                                <div class="dropdown">
+                                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                        @if (auth()->user()->id === $order->user_id)
+                                            <form action="{{ route('order.destroy', $order) }}" method="post">
+                                                @csrf
+                                                @method('delete')
+
+                                                <a class="dropdown-item"
+                                                   href="{{ route('order.edit', $order) }}">{{ __('Edit') }}</a>
+                                                <button type="button" class="dropdown-item"
+                                                        onclick="confirm('{{ __("Are you sure you want to delete this menu?") }}') ? this.parentElement.submit() : ''">
+                                                    {{ __('Annuleren') }}
+                                                </button>
+                                            </form>
+                                        @else
+                                            <a class="dropdown-item"
+                                               href="{{ route('order.edit', $order) }}">{{ __('Edit') }}</a>
+                                        @endif
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
+
                     @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-    </div>
+
 @endsection

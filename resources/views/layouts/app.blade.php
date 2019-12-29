@@ -19,8 +19,10 @@
     <!-- CSS -->
     <link href="{{ asset('black') }}/css/black-dashboard.css?v=1.0.0" rel="stylesheet"/>
     <link href="{{ asset('black') }}/css/theme.css" rel="stylesheet"/>
+
 </head>
 <body class="{{ $class ?? '' }}">
+
 @auth()
     <div class="wrapper">
         @include('layouts.navbars.sidebar')
@@ -107,7 +109,6 @@
 
 <script src="{{ asset('black') }}/js/black-dashboard.min.js?v=1.0.0"></script>
 <script src="{{ asset('black') }}/js/theme.js"></script>
-
 
 @stack('js')
 

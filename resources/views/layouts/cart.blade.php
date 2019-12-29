@@ -5,7 +5,8 @@
     <form method="post" action="{{ route('order.store') }}">
         @csrf
         <div class="card-body">
-            @include('alerts.failed')
+            @include('alerts.success')
+
 
             <table class="table table-borderless" id="cartTable">
                 <thead>

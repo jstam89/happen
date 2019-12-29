@@ -1,7 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.app', ['pageSlug' => 'order.overview'])
+
 @section('content')
 
-    <h1>Order overzicht</h1>
-
+    <h1>order overzicht</h1>
 
 @endsection
