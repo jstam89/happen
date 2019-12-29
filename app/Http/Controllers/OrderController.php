@@ -20,7 +20,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $menus = Menu::orderBy('id', 'asc')->get();
+        $menus = Menu::orderBy('id', 'asc')
+            ->get();
 
         return view('order.index')->with('menus', $menus);
     }
@@ -48,15 +49,13 @@ class OrderController extends Controller
         $orders = $request->input('cart');
 
         if ( ! $orders) {
-
-            return redirect('/order')->withStatus('Geen menu geselecteerd');
-
+            return response()->json('No orders', 422);
         }
 
         foreach ($orders as $product) {
 
             $order             = new Order();
-            $order->menu_id    = $product['menu_id'];
+            $order->menu_id    = $product['id'];
             $order->quantity   = $product['quantity'];
             $order->user_id    = $request->user()->id;
             $order->ordered_at = Carbon::now();
@@ -64,7 +63,7 @@ class OrderController extends Controller
             $order->save();
         }
 
-        return redirect('/order')->withStatus('Uw menu is besteld');
+        return response()->json("Uw menu is besteld", 201);
     }
 
 
@@ -123,4 +122,7 @@ class OrderController extends Controller
         die('order met id: ' . $id . ' verwijderen');
     }
 
+    public function saveSession(Request $request) {
+        $request->session()->put('menus', $request->all());
+    }
 }

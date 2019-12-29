@@ -64,6 +64,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('order', 'OrderController');
+    Route::post('order/save/session', 'OrderController@saveSession')->name('order.session');
 
     Route::get('order',
         [
