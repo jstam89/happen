@@ -7,7 +7,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-8">
-                            <h4 class="card-title">{{ __('Orders') }}</h4>
+                            <h4 class="card-title">{{ __('Bestellingen') }}</h4>
                         </div>
                         <div class="col-4 text-right">
                             <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"

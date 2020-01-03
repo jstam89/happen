@@ -4,7 +4,7 @@ use Illuminate\Database\Seeder;
 
 class MenusTableSeeder extends Seeder
 {
-    private $numberOfMenus = 3;
+    private $numberOfMenus = 5;
 
     /**
      * Run the database seeds.
