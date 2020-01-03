@@ -145,8 +145,8 @@
                     @foreach($orders as $order)
                         <tr>
                             <td>{{ $order->id }}</td>
-                            <td>{{ $order->menu_id }}</td>
-                            <td>{{ $order->ordered_at }}</td>
+                            <td>{{ $order->menu_id}}</td>
+                            <td>{{date('d-m-Y', strtotime($order->ordered_at))}}</td>
                             <td class="text-right">
                                 <div class="dropdown">
                                     <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"

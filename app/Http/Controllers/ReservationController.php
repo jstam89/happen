@@ -68,13 +68,13 @@ class ReservationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param Reservation $reservation
-     *
-     * @return void
+     * @return Factory|View
      */
-    public function show(Reservation $reservation)
+    public function show()
     {
-        //
+        $reservations = Reservation::all();
+
+        return view('reservation.manage');
     }
 
     /**

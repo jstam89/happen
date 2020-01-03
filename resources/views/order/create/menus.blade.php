@@ -6,6 +6,32 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
+                    <h5 class="title">{{ __('Daghap Geschiedenis') }}</h5>
+                </div>
+                <form class="card-body">
+                    @csrf
+
+                    @include('alerts.success')
+
+                    <div class="form-group">
+                        <label>{{__('Kies een menu')}}</label>
+                        <select class="form-control" style="background-color:#27293d;" name="quantity">
+                            @foreach($menus as $menu)
+                                <option value="{{$menu->title}}">{{$menu->title}}</option>
+                            @endforeach
+                        </select>
+                        <div class="form-group">
+                            <label>{{ __('Afhaal datum') }}</label>
+                            <input type="date" name="takeout_date" class="form-control">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">{{ __('Snel toevoegen') }}</button>
+                </form>
+            </div>
+
+
+            <div class="card">
+                <div class="card-header">
                     <h5 class="title">{{ __('Daghap Toevoegen') }}</h5>
                 </div>
                 <form method="post" enctype="multipart/form-data" action="{{ route('menus.store') }}"
@@ -66,12 +92,9 @@
                                 <td>{{ $menu->title }}</td>
                                 <td>{{ $menu->takeout_date }}</td>
                                 <td>
-                                    <div class="dropdown">
-                                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
-                                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v"></i>
-                                        </a>
-                                    </div>
+                                    <button class="btn btn-sm btn-icon-only text-light" type="submit">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
                                 </td>
 
                             </tr>

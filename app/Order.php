@@ -15,10 +15,17 @@ class Order extends Model
         = [
             'menu_id',
             'user_id',
+            'quantity',
+            'ordered_at'
         ];
 
-    public function users()
+    public function user()
     {
-        return $this->belongsToMany(User::class, 'user_id');
+        return $this->belongsTo(User::class);
+    }
+
+    public function menus()
+    {
+        return $this->hasMany(Menu::class);
     }
 }

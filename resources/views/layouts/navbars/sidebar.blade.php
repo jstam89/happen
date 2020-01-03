@@ -28,8 +28,7 @@
                     <i class="tim-icons icon-single-02"></i>
                     <p>{{ __('Daghap Toevoegen') }}</p>
                 </a>
-            </
-            >
+            </li>
             <li @if ($pageSlug ?? '' == 'users') class="active " @endif>
                 <a href="{{ route('user.index')  }}">
                     <i class="tim-icons icon-bullet-list-67"></i>
@@ -39,7 +38,13 @@
             <li @if ($pageSlug ?? '' == 'overview') class="active " @endif>
                 <a href="{{ route('order.overview') }}">
                     <i class="tim-icons icon-atom"></i>
-                    <p>{{ __('Order overzicht') }}</p>
+                    <p>{{ __('Bestellingen') }}</p>
+                </a>
+            </li>
+            <li @if ($pageSlug ?? '' == 'reserveringen') class="active " @endif>
+                <a href="{{ route('reservations.manage') }}">
+                    <i class="tim-icons icon-atom"></i>
+                    <p>{{ __('Reserveringen') }}</p>
                 </a>
             </li>
         </ul>

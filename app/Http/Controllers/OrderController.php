@@ -21,7 +21,7 @@ class OrderController extends Controller
     public function index()
     {
         $menus = Menu::orderBy('id', 'asc')
-            ->get();
+                     ->get();
 
         return view('order.index')->with('menus', $menus);
     }
@@ -76,7 +76,6 @@ class OrderController extends Controller
     public function show()
     {
 
-
         $orders = Order::all();
 
         return view('order.overview')->with('orders', $orders);
@@ -122,7 +121,8 @@ class OrderController extends Controller
         die('order met id: ' . $id . ' verwijderen');
     }
 
-    public function saveSession(Request $request) {
+    public function saveSession(Request $request)
+    {
         $request->session()->put('menus', $request->all());
     }
 }

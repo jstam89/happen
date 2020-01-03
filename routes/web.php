@@ -28,13 +28,13 @@ Route::get('/home', 'HomeController@index')
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('menus', 'MenuController');
 
-    Route::get('/menus',
+    Route::get('/toevoegen',
         [
             'as'   => 'menus.create',
             'uses' => 'MenuController@create'
         ]);
 
-    Route::get('menu',
+    Route::get('/menu',
         [
             'as'   => 'menu.destroy',
             'uses' => 'MenuController@destroy'
@@ -64,15 +64,16 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('order', 'OrderController');
-    Route::post('order/save/session', 'OrderController@saveSession')->name('order.session');
+    Route::post('order/save/session', 'OrderController@saveSession')
+         ->name('order.session');
 
-    Route::get('order',
+    Route::get('bestellen',
         [
             'as'   => 'order.home',
             'uses' => 'OrderController@index'
         ]);
 
-    Route::get('orders/overview',
+    Route::get('orders/manage',
         [
             'as'   => 'order.overview',
             'uses' => 'OrderController@show'
@@ -83,7 +84,7 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('reservation', 'ReservationController');
 
-    Route::get('reservation',
+    Route::get('reserveren',
         [
             'as'   => 'reservation.index',
             'uses' => 'ReservationController@index'
@@ -93,6 +94,12 @@ Route::group(['middleware' => 'auth'], function () {
         [
             'as'   => 'reservation.create',
             'uses' => 'ReservationController@create'
+        ]);
+
+    Route::get('reservations/manage',
+        [
+            'as'   => 'reservations.manage',
+            'uses' => 'ReservationController@show'
         ]);
 
 });

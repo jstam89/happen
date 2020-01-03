@@ -85,7 +85,7 @@ class MenuController extends Controller
      */
     public function edit($id)
     {
-        //
+        die('menu edit');
     }
 
     /**

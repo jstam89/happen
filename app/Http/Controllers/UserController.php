@@ -7,6 +7,7 @@ use App\User;
 use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\View\View;
 
 class UserController extends Controller
 {
@@ -15,17 +16,18 @@ class UserController extends Controller
      *
      * @param User $model
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index(User $model)
     {
+
         return view('users.index', ['users' => $model->paginate(15)]);
     }
 
     /**
      * Show the form for creating a new user
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function create()
     {
@@ -54,7 +56,7 @@ class UserController extends Controller
      *
      * @param User $user
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function edit(User $user)
     {
