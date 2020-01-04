@@ -19,6 +19,7 @@ class CreateOrdersTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamp('ordered_at')->nullable();
             $table->string('status')->nullable();
+            $table->timestamps();
         });
     }
 

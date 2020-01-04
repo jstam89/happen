@@ -18,7 +18,6 @@ class CreateMenuOrderTable extends Migration
             $table->unsignedBigInteger('menu_id');
             $table->unsignedBigInteger('order_id');
             $table->unsignedInteger('quantity');
-            $table->timestamps();
 
             $table->unique(['menu_id', 'order_id']);
         });
