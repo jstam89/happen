@@ -17,7 +17,6 @@
                 <tbody>
                 @foreach ($users as $user)
                     @foreach($user->orders->take(5) as $order)
-
                         <tr>
                             <td>{{ $user->id }}</td>
                             <td>{{ $user->name }}</td>

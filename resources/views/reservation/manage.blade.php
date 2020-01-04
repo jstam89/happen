@@ -12,7 +12,7 @@
                         <div class="col-4 text-right">
                             <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
                                     data-target="#OrderModal">
-                                {{ __('Zoeken') }}
+                                {{ __('Filter') }}
                             </button>
                         </div>
                     </div>
@@ -26,27 +26,40 @@
                             <th scope="col">{{ __('Id') }}</th>
                             <th scope="col">{{ __('Door') }}</th>
                             <th scope="col">{{ __('Aantal personen') }}</th>
-                            <th scope="col">{{ __('Datum') }}</th>
-                            <th>Opties</th>
+                            <th scope="col">{{ __('Gereserveerd voor') }}</th>
                             <th scope="col"></th>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>#</td>
-                                <td>
-                                    <a href="#"
-                                       class="btn btn-sm btn-primary">
-                                        <i class="fas fa-edit"></i> </a>
-                                    <a href="#"
-                                       class="btn btn-sm btn-danger">
-                                        <i class="fas fa-trash"></i>
-                                    </a>
-                                </td>
+                            @foreach ($reservations as $reservation)
+                                <tr>
+                                    <td>{{$reservation->id}}</td>
+                                    <td>{{$reservation->user->name}}</td>
+                                    <td>{{$reservation->quantity}}</td>
+                                    <td>{{date('d-m-Y', strtotime($reservation->reserved_date))}}</td>
+                                    <td class="text-right">
+                                        <div class="dropdown">
+                                            <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
+                                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fas fa-ellipsis-v"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
 
-                            </tr>
+                                                <form action="{{route('reservation.destroy', $reservation)}}"
+                                                      method="post">
+                                                    @csrf
+                                                    @method('delete')
+
+                                                    <button type="button" class="dropdown-item"
+                                                            onclick="confirm('{{ __("Weet je zeker dat je deze reservering wil verwijderen?") }}') ? this.parentElement.submit() : ''">
+                                                        {{ __('Verwijderen') }}
+                                                    </button>
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>

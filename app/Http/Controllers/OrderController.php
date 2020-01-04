@@ -7,6 +7,7 @@ use App\Order;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\View\View;
@@ -42,7 +43,7 @@ class OrderController extends Controller
      *
      * @param Request $request
      *
-     * @return void
+     * @return JsonResponse
      */
     public function store(Request $request)
     {
@@ -61,6 +62,10 @@ class OrderController extends Controller
             $order->ordered_at = Carbon::now();
 
             $order->save();
+
+            //TODO: Bevestiging mail moet verzonden worden maar geeft fout
+            //Mail::to($request->user()->id)->send(new NewOrder($order));
+
         }
 
         return response()->json("Uw menu is besteld", 201);
@@ -76,9 +81,7 @@ class OrderController extends Controller
     public function show()
     {
 
-//        $orders = Order::with('user')->get();
-        $orders = Order::all();
-        dd($orders);
+        $orders = Order::with('user')->get();
 
         return view('order.overview')->with('orders', $orders);
     }
@@ -103,24 +106,28 @@ class OrderController extends Controller
      *
      * @return Response
      */
-    public
-    function update(
-        Request $request,
-        $id
-    ) {
+    public function update(Request $request, $id)
+    {
         //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param $id
+     * @param Order $order
      *
      * @return void
+     * @throws Exception
      */
-    public function destroy($id)
+    public function destroy(Order $order)
     {
-        die('order met id: ' . $id . ' verwijderen');
+        //check of de request van gebruiker komt of van de admin
+        //als van gebruiker redirect to profile
+        //als van admin redirect naar order overzicht
+        $order->delete();
+
+        return redirect()->route('order.overview')
+                         ->withStatus(__('Order succesvol verwijderd.'));
     }
 
     public function saveSession(Request $request)

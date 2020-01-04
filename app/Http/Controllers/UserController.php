@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserRequest;
 use App\User;
 use Exception;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
@@ -56,11 +57,11 @@ class UserController extends Controller
      *
      * @param User $user
      *
-     * @return View
+     * @return Factory|View
      */
     public function edit(User $user)
     {
-        if ($user->id == 1) {
+        if ($user->id === 1) {
             return redirect()->route('user.index');
         }
 
@@ -92,18 +93,23 @@ class UserController extends Controller
      *
      * @param User $user
      *
-     * @return RedirectResponse
+     * @return void
      * @throws Exception
      */
     public function destroy(User $user)
     {
-        if ($user->id == 1) {
+        if ($user->id === 1) {
             return abort(403);
         }
 
         $user->delete();
 
         return redirect()->route('user.index')
-                         ->withStatus(__('User successfully deleted.'));
+                         ->withStatus(__('Gebruiker succesvol verwijderd.'));
+    }
+
+    public function show()
+    {
+        //
     }
 }

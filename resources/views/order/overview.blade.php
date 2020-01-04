@@ -12,7 +12,7 @@
                         <div class="col-4 text-right">
                             <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
                                     data-target="#OrderModal">
-                                {{ __('Zoeken') }}
+                                {{ __('Filter') }}
                             </button>
                             @include('layouts.navbars.modal')
                         </div>
@@ -29,7 +29,6 @@
                             <th scope="col">{{ __('Aantal') }}</th>
                             <th scope="col">{{ __('Gebruiker') }}</th>
                             <th scope="col">{{ __('Besteld op') }}</th>
-                            <th>Opties</th>
                             <th scope="col"></th>
                             </thead>
                             <tbody>
@@ -38,16 +37,28 @@
                                     <td>{{$order->id}}</td>
                                     <td>{{$order->menu_id}}</td>
                                     <td>{{$order->quantity}}</td>
-                                    <td>{{$order->user_id}}</td>
+                                    <td>{{$order->user->name}}</td>
                                     <td>{{date('d-m-Y', strtotime($order->ordered_at))}}</td>
-                                    <td>
-                                        <a href="#"
-                                           class="btn btn-sm btn-primary">
-                                            <i class="fas fa-edit"></i> </a>
-                                        <a href="#"
-                                           class="btn btn-sm btn-danger">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
+                                    <td class="text-right">
+                                        <div class="dropdown">
+                                            <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
+                                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fas fa-ellipsis-v"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+
+                                                <form action="{{route('order.destroy', $order)}}" method="post">
+                                                    @csrf
+                                                    @method('delete')
+
+                                                    <button type="button" class="dropdown-item"
+                                                            onclick="confirm('{{ __("Weet je zeker dat je deze order wil verwijderen?") }}') ? this.parentElement.submit() : ''">
+                                                        {{ __('Verwijderen') }}
+                                                    </button>
+                                                </form>
+
+                                            </div>
+                                        </div>
                                     </td>
 
                                 </tr>

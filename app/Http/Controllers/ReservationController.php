@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Reservation;
+use Exception;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -49,7 +50,9 @@ class ReservationController extends Controller
 
         $reservation->save();
 
-        return redirect('/reservation')->withStatus('Tafel gereserveerd');
+        return redirect()->route('reservation.index')
+                         ->withStatus(__('Tafel is gereserveerd.'));
+
 
     }
 
@@ -72,9 +75,11 @@ class ReservationController extends Controller
      */
     public function show()
     {
-        $reservations = Reservation::all();
 
-        return view('reservation.manage');
+        $reservations = Reservation::with('user')->get();
+
+        return view('reservation.manage')->with('reservations', $reservations);
+
     }
 
     /**
@@ -108,9 +113,13 @@ class ReservationController extends Controller
      * @param Reservation $reservation
      *
      * @return Response
+     * @throws Exception
      */
     public function destroy(Reservation $reservation)
     {
-        //
+        $reservation->delete();
+
+        return redirect()->route('reservations.manage')
+                         ->withStatus(__('Reservering succesvol verwijderd.'));
     }
 }

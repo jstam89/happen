@@ -47,6 +47,7 @@ class User extends Authenticatable
     private $password;
     private $email;
     private $name;
+    private $id;
 
     public function orders()
     {
