@@ -81,7 +81,9 @@ class OrderController extends Controller
     public function show()
     {
 
-        $orders = Order::with('user')->get();
+        $orders = Order::with('user', 'menus')->get();
+
+        dd($orders);
 
         return view('order.overview')->with('orders', $orders);
     }
