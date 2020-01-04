@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Mail;
  */
 class WelcomeNewUserListener
 {
-
     /**
      * Handle the event.
      *
