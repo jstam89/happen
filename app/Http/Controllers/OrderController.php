@@ -47,26 +47,30 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        $orders = $request->input('cart');
+        $cartItems = $request->input('cart');
 
-        if ( ! $orders) {
+        if ( ! $cartItems) {
             return response()->json('No orders', 422);
         }
 
-        foreach ($orders as $product) {
+        $order             = new Order();
+        $order->user_id    = auth()->user()->id;
+        $order->ordered_at = Carbon::now();
+        $order->save();
 
-            $order             = new Order();
-            $order->menu_id    = $product['id'];
-            $order->quantity   = $product['quantity'];
-            $order->user_id    = $request->user()->id;
-            $order->ordered_at = Carbon::now();
-
-            $order->save();
-
-            //TODO: Bevestiging mail moet verzonden worden maar geeft fout
-            //Mail::to($request->user()->id)->send(new NewOrder($order));
-
+        // Fetch the array to insert in the pivot table
+        $attach = [];
+        foreach($cartItems as $cartItem) {
+            $attach[] = [
+                'menu_id' => $cartItem['id'],
+                'quantity' => $cartItem['quantity']
+            ];
         }
+
+        $order->menus()->attach($attach);
+
+        //TODO: Bevestiging mail moet verzonden worden maar geeft fout
+        //Mail::to($request->user()->id)->send(new NewOrder($order));
 
         return response()->json("Uw menu is besteld", 201);
     }
