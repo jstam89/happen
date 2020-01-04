@@ -35,8 +35,8 @@
                     <p>{{ __('Gebruikers beheren') }}</p>
                 </a>
             </li>
-            <li @if ($pageSlug ?? '' == 'overview') class="active " @endif>
-                <a href="{{ route('order.overview') }}">
+            <li @if ($pageSlug ?? '' == 'orders') class="active " @endif>
+                <a href="{{ route('orders.manage') }}">
                     <i class="tim-icons icon-atom"></i>
                     <p>{{ __('Bestellingen') }}</p>
                 </a>

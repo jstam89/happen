@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewUserHasRegisteredEvent;
 use App\Http\Requests\UserRequest;
 use App\User;
 use Exception;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 
@@ -38,18 +40,22 @@ class UserController extends Controller
     /**
      * Store a newly created user in storage
      *
-     * @param \App\Http\Requests\UserRequest $request
-     * @param User                           $model
+     * @param Request $request
+     * @param User    $model
      *
-     * @return RedirectResponse
+     * @return
      */
-    public function store(UserRequest $request, User $model)
+    public function store(Request $request, User $model)
     {
+        $user = $request->all();
+
         $model->create($request->merge(['password' => Hash::make($request->get('password'))])
                                ->all());
 
+        event(new NewUserHasregisteredEvent($user));
+
         return redirect()->route('user.index')
-                         ->withStatus(__('User successfully created.'));
+                         ->withStatus('Gebruiker succesvol geregistreerd');
     }
 
     /**
@@ -71,8 +77,8 @@ class UserController extends Controller
     /**
      * Update the specified user in storage
      *
-     * @param \App\Http\Requests\UserRequest $request
-     * @param User                           $user
+     * @param UserRequest $request
+     * @param User        $user
      *
      * @return RedirectResponse
      */
@@ -85,7 +91,7 @@ class UserController extends Controller
                     ));
 
         return redirect()->route('user.index')
-                         ->withStatus(__('User successfully updated.'));
+                         ->withStatus('Gebruiker succesvol geupdate');
     }
 
     /**

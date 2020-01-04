@@ -75,7 +75,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('orders/manage',
         [
-            'as'   => 'order.overview',
+            'as'   => 'orders.manage',
             'uses' => 'OrderController@show'
         ]);
 

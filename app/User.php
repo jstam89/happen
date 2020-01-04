@@ -5,6 +5,9 @@ namespace App;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * @method create(array $all)
+ */
 class User extends Authenticatable
 {
     use Notifiable;

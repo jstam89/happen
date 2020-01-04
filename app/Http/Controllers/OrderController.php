@@ -60,17 +60,14 @@ class OrderController extends Controller
 
         // Fetch the array to insert in the pivot table
         $attach = [];
-        foreach($cartItems as $cartItem) {
+        foreach ($cartItems as $cartItem) {
             $attach[] = [
-                'menu_id' => $cartItem['id'],
+                'menu_id'  => $cartItem['id'],
                 'quantity' => $cartItem['quantity']
             ];
         }
 
         $order->menus()->attach($attach);
-
-        //TODO: Bevestiging mail moet verzonden worden maar geeft fout
-        //Mail::to($request->user()->id)->send(new NewOrder($order));
 
         return response()->json("Uw menu is besteld", 201);
     }
@@ -87,9 +84,7 @@ class OrderController extends Controller
 
         $orders = Order::with('user', 'menus')->get();
 
-        dd($orders);
-
-        return view('order.overview')->with('orders', $orders);
+        return view('order.manage')->with('orders', $orders);
     }
 
     /**
@@ -132,7 +127,7 @@ class OrderController extends Controller
         //als van admin redirect naar order overzicht
         $order->delete();
 
-        return redirect()->route('order.overview')
+        return redirect()->route('orders.manage')
                          ->withStatus(__('Order succesvol verwijderd.'));
     }
 

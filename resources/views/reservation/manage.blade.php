@@ -2,6 +2,36 @@
 
 @section('content')
     <div class="row">
+        <div class="col-lg-4">
+            <div class="card card-chart">
+                <div class="card-header">
+                    <h4 class="card-title">Reserveringen vandaag</h4>
+                    <h2 class="card-title"><i class="tim-icons icon-bell-55 text-primary"></i>6</h2>
+                </div>
+                <div class="card-body">
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card card-chart">
+                <div class="card-header">
+                    <h4 class="card-title">Reserveringen morgen</h4>
+                    <h2 class="card-title"><i class="tim-icons icon-bell-55 text-primary"></i> 23</h2>
+                </div>
+                <div class="card-body">
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card card-chart">
+                <div class="card-header">
+                    <h4 class="card-title">Deze week</h4>
+                    <h2 class="card-title"><i class="tim-icons icon-bell-55 text-primary"></i> 65</h2>
+                </div>
+                <div class="card-body">
+                </div>
+            </div>
+        </div>
         <div class="col-md-12">
             <div class="card ">
                 <div class="card-header">

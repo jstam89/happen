@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
+use App\Events\NewUserHasRegisteredEvent;
+use App\Listeners\WelcomeNewUserListener;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use SocialiteProviders\Manager\SocialiteWasCalled;
 
@@ -16,10 +16,10 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen
         = [
-            Registered::class         => [
-                SendEmailVerificationNotification::class,
+            NewUserHasRegisteredEvent::class => [
+                WelcomeNewUserListener::class,
             ],
-            SocialiteWasCalled::class => [
+            SocialiteWasCalled::class        => [
                 // add your listeners (aka providers) here
                 'SocialiteProviders\\Graph\\GraphExtendSocialite@handle',
             ],

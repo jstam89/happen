@@ -1,9 +1,5 @@
 <div class="card ">
     <div class="card-header">
-        <button type="submit"
-                class="btn btn-icon btn-sm pull-right ">
-            <i class="fas fa-list"></i>
-        </button>
         <h4 class="card-title">Recente orders</h4>
     </div>
     <div class="card-body">
@@ -21,6 +17,12 @@
                             <td>{{ $user->id }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{date('d-m-Y', strtotime($order->ordered_at))}}</td>
+                            <td>
+                                <button type="submit"
+                                        class="btn btn-icon btn-sm pull-right ">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                            </td>
                         </tr>
                     @endforeach
                 @endforeach
