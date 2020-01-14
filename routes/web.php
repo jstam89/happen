@@ -117,4 +117,26 @@ Route::get('/oauth/callback',
         'uses' => 'Auth\LoginController@handleProviderCallback'
     ]);
 
+Route::get('survey',
+    [
+        'as'   => 'survey.index',
+        'uses' => 'SurveyController@index'
+    ]);
 
+Route::get('survey/create',
+    [
+        'as'   => 'survey.create',
+        'uses' => 'SurveyController@create'
+    ]);
+
+Route::post('survey/store',
+    [
+        'as'   => 'survey.store',
+        'uses' => 'SurveyController@store'
+    ]);
+
+Route::get('survey/show/{id}',
+    [
+        'as'   => 'survey.show',
+        'uses' => 'SurveyController@show'
+    ]);

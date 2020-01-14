@@ -34,7 +34,7 @@
                 <div class="card-header">
                     <h5 class="title">{{ __('Daghap Toevoegen') }}</h5>
                 </div>
-                <form method="post" enctype="multipart/form-data" action="{{ route('menus.store') }}"
+                <form method="post" enctype="multipart/form-data" action="{{route('menus.store')}}"
                       autocomplete="off">
                     <div class="card-body">
                         @csrf

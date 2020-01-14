@@ -72,7 +72,7 @@ class MenuController extends Controller
 
         $menu->save();
 
-        return redirect('/menus')->withStatus('success', 'Menu Toegevoegd');
+        return redirect('/toevoegen')->withStatus('success', 'Menu Toegevoegd');
     }
 
 

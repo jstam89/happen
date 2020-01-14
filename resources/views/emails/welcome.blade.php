@@ -1,3 +1,5 @@
 @component('mail::message')
-    #welcome new user
+
+    #Welkom {{$user['name']}},
+
 @endcomponent

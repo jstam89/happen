@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
-    
+
     /**
      * Show the form for editing the profile.
      *
@@ -17,10 +17,10 @@ class ProfileController extends Controller
     public function edit()
     {
         $orders = auth()->user()->orders()->get();
-        
+
         return view('profile.edit', compact('orders'));
     }
-    
+
     /**
      * Update the profile
      *
@@ -31,14 +31,14 @@ class ProfileController extends Controller
     public function update(ProfileRequest $request)
     {
         auth()->user()->update($request->all());
-        
+
         return back()->withStatus(__('Profile successfully updated.'));
     }
-    
+
     /**
      * Change the password
      *
-     * @param \App\Http\Requests\PasswordRequest $request
+     * @param PasswordRequest $request
      *
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -46,7 +46,7 @@ class ProfileController extends Controller
     {
         auth()->user()
               ->update(['password' => Hash::make($request->get('password'))]);
-        
+
         return back()->withPasswordStatus(__('Password successfully updated.'));
     }
 }

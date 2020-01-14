@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\OrderConfirmed;
 use App\Menu;
 use App\Order;
 use Carbon\Carbon;
@@ -21,8 +22,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $menus = Menu::orderBy('id', 'asc')
-                     ->get();
+        $menus = Menu::orderBy('id', 'asc')->get();
 
         return view('order.index')->with('menus', $menus);
     }
@@ -49,10 +49,6 @@ class OrderController extends Controller
     {
         $cartItems = $request->input('cart');
 
-        if ( ! $cartItems) {
-            return response()->json('No orders', 422);
-        }
-
         $order             = new Order();
         $order->user_id    = auth()->user()->id;
         $order->ordered_at = Carbon::now();
@@ -69,7 +65,9 @@ class OrderController extends Controller
 
         $order->menus()->attach($attach);
 
-        return response()->json("Uw menu is besteld", 201);
+        OrderConfirmed::dispatch($order);
+
+        return response()->json('Uw menu is besteld', 201);
     }
 
 

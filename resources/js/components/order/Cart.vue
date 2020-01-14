@@ -108,7 +108,6 @@
             quantity: 1
           });
         }
-
         this.save();
       });
 

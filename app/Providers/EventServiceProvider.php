@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Events\NewUserHasRegisteredEvent;
+use App\Events\NewUserHasRegistered;
 use App\Listeners\WelcomeNewUserListener;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use SocialiteProviders\Manager\SocialiteWasCalled;
@@ -16,7 +16,7 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen
         = [
-            NewUserHasRegisteredEvent::class => [
+            NewUserHasRegistered::class => [
                 WelcomeNewUserListener::class,
             ],
             SocialiteWasCalled::class        => [

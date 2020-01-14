@@ -7,7 +7,7 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Black Dashboard') }}</title>
+    <title>{{ config('app.name', 'Happen') }}</title>
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('black') }}/img/apple-icon.png">
     <link rel="icon" type="image/png" href="{{ asset('black') }}/img/favicon.png">
@@ -19,10 +19,8 @@
     <!-- CSS -->
     <link href="{{ asset('black') }}/css/black-dashboard.css?v=1.0.0" rel="stylesheet"/>
     <link href="{{ asset('black') }}/css/theme.css" rel="stylesheet"/>
-
 </head>
 <body class="{{ $class ?? '' }}">
-{{--    <app-test></app-test>--}}
 @auth()
     <div class="wrapper">
         @include('layouts.navbars.sidebar')
@@ -52,19 +50,17 @@
         </div>
     </div>
 @endauth
-
+<script src="{{ asset('black') }}/js/plugins/perfect-scrollbar.jquery.min.js"></script>
 <script src="{{ asset('black') }}/js/core/jquery.min.js"></script>
 <script src="{{ asset('black') }}/js/core/popper.min.js"></script>
 <script src="{{ asset('black') }}/js/core/bootstrap.min.js"></script>
-<script src="{{ asset('black') }}/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+
 <!--  Google Maps Plugin    -->
 <!-- Place this tag in your head or just before your close body tag. -->
 {{-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> --}}
 <!-- Chart JS -->
 {{-- <script src="{{ asset('black') }}/js/plugins/chartjs.min.js"></script> --}}
 <!--  Notifications Plugin    -->
-<script src="{{ asset('black') }}/js/plugins/bootstrap-notify.js"></script>
-
 <script src="{{ asset('black') }}/js/black-dashboard.min.js?v=1.0.0"></script>
 <script src="{{ asset('black') }}/js/theme.js"></script>
 <script src="{{ mix('js/app.js') }}" defer></script>

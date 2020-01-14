@@ -51,55 +51,48 @@
                 <div class="card-body">
                     @include('alerts.success')
 
-                    <div class="">
-                        <table class="table tablesorter" id="">
-                            <thead class=" text-primary">
-                            <th scope="col">{{ __('Menu') }}</th>
-                            <th scope="col">{{ __('Aantal') }}</th>
-                            <th scope="col">{{ __('Gebruiker') }}</th>
-                            <th scope="col">{{ __('Ophaal datum') }}</th>
-                            <th scope="col"></th>
-                            </thead>
-                            <tbody>
-                            @foreach ($orders as $order)
-                                @foreach($order->menus as $menu)
-                                    <tr>
-                                        <td>{{$menu->title}}</td>
-                                        <td>{{$menu->quantity}}</td>
-                                        <td>{{$order->user->name}}</td>
-                                        <td>{{date('d-m-Y', strtotime($menu->takeout_date))}}</td>
-                                        <td class="text-right">
-                                            <div class="dropdown">
-                                                <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
-                                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="fas fa-ellipsis-v"></i>
-                                                </a>
-                                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                    <table class="table tablesorter" id="">
+                        <thead class=" text-primary">
+                        <th scope="col">{{ __('Menu') }}</th>
+                        <th scope="col">{{ __('Aantal') }}</th>
+                        <th scope="col">{{ __('Gebruiker') }}</th>
+                        <th scope="col">{{ __('Ophaal datum') }}</th>
+                        <th scope="col"></th>
+                        </thead>
+                        <tbody>
+                        @foreach ($orders as $order)
+                            @foreach($order->menus as $menu)
+                                <tr>
+                                    <td>{{$menu->title}}</td>
+                                    <td>{{$menu->quantity}}</td>
+                                    <td>{{$order->user->name}}</td>
+                                    <td>{{date('d-m-Y', strtotime($menu->takeout_date))}}</td>
+                                    <td class="text-right">
+                                        <div class="dropdown">
+                                            <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
+                                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fas fa-ellipsis-v"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
 
-                                                    <form action="{{route('order.destroy', $order)}}" method="post">
-                                                        @csrf
-                                                        @method('delete')
+                                                <form action="{{route('order.destroy', $order)}}" method="post">
+                                                    @csrf
+                                                    @method('delete')
 
-                                                        <button type="button" class="dropdown-item"
-                                                                onclick="confirm('{{ __("Weet je zeker dat je deze order wil verwijderen?") }}') ? this.parentElement.submit() : ''">
-                                                            {{ __('Verwijderen') }}
-                                                        </button>
-                                                    </form>
+                                                    <button type="button" class="dropdown-item"
+                                                            onclick="confirm('{{ __("Weet je zeker dat je deze order wil verwijderen?") }}') ? this.parentElement.submit() : ''">
+                                                        {{ __('Verwijderen') }}
+                                                    </button>
+                                                </form>
 
-                                                </div>
                                             </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                        </div>
+                                    </td>
+                                </tr>
                             @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="card-footer py-4">
-                    <nav class="d-flex justify-content-end" aria-label="...">
-                        {{--                        {{ $users->links() }}--}}
-                    </nav>
+                        @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

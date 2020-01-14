@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\NewUserHasRegisteredEvent;
+use App\Events\NewUserHasRegistered;
 use App\Http\Requests\UserRequest;
+use App\Providers\EventServiceProvider;
 use App\User;
 use Exception;
+use Illuminate\Console\Scheduling\Event;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -23,7 +25,6 @@ class UserController extends Controller
      */
     public function index(User $model)
     {
-
         return view('users.index', ['users' => $model->paginate(15)]);
     }
 
@@ -52,7 +53,7 @@ class UserController extends Controller
         $model->create($request->merge(['password' => Hash::make($request->get('password'))])
                                ->all());
 
-        event(new NewUserHasregisteredEvent($user));
+        NewUserHasRegistered::dispatch($user);
 
         return redirect()->route('user.index')
                          ->withStatus('Gebruiker succesvol geregistreerd');
@@ -112,10 +113,5 @@ class UserController extends Controller
 
         return redirect()->route('user.index')
                          ->withStatus(__('Gebruiker succesvol verwijderd.'));
-    }
-
-    public function show()
-    {
-        //
     }
 }

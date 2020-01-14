@@ -1,7 +1,6 @@
 @extends('layouts.app', ['pageSlug' => 'order.index'])
 
 @section('content')
-
     <div id="vue" class="row">
         <div class="col-md-7">
             @foreach($menus as $menu)
@@ -40,4 +39,5 @@
             ></vue-cart>
         </div>
     </div>
+
 @endsection

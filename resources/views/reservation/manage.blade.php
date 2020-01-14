@@ -50,7 +50,7 @@
                 <div class="card-body">
                     @include('alerts.success')
 
-                    <div class="">
+                    <div class="col-md-12">
                         <table class="table tablesorter" id="">
                             <thead class=" text-primary">
                             <th scope="col">{{ __('Id') }}</th>
@@ -84,7 +84,6 @@
                                                         {{ __('Verwijderen') }}
                                                     </button>
                                                 </form>
-
                                             </div>
                                         </div>
                                     </td>
@@ -93,10 +92,6 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
-                <div class="card-footer py-4">
-                    <nav class="d-flex justify-content-end" aria-label="...">
-                    </nav>
                 </div>
             </div>
         </div>
