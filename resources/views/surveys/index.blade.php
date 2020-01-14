@@ -28,13 +28,9 @@
                     <h2 class="card-title menu-title">{{ __('Questions') }}</h2>
                 </div>
                 <div class="card-body">
-
                 </div>
             </div>
         </div>
     </div>
-
-
-
 @endsection
 
