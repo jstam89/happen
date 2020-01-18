@@ -47,23 +47,12 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        $cartItems = $request->input('cart');
-
         $order             = new Order();
         $order->user_id    = auth()->user()->id;
+        $order->menu_id    = '1';
+        $order->quantity   = '5';
         $order->ordered_at = Carbon::now();
         $order->save();
-
-        // Fetch the array to insert in the pivot table
-        $attach = [];
-        foreach ($cartItems as $cartItem) {
-            $attach[] = [
-                'menu_id'  => $cartItem['id'],
-                'quantity' => $cartItem['quantity']
-            ];
-        }
-
-        $order->menus()->attach($attach);
 
         OrderConfirmed::dispatch($order);
 
@@ -80,7 +69,7 @@ class OrderController extends Controller
     public function show()
     {
 
-        $orders = Order::with('user', 'menus')->get();
+        $orders = Order::with('user')->get();
 
         return view('order.manage')->with('orders', $orders);
     }

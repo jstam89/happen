@@ -135,7 +135,7 @@ Route::post('survey/store',
         'uses' => 'SurveyController@store'
     ]);
 
-Route::get('survey/show/{id}',
+Route::get('survey/show/',
     [
         'as'   => 'survey.show',
         'uses' => 'SurveyController@show'

@@ -30,6 +30,7 @@
         "vue-template-compiler": "^2.6.11"
     },
     "dependencies": {
+        "datatables.net": "^1.10.20",
         "material-dashboard-dark-edition": "^2.1.0"
     }
 }

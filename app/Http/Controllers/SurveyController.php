@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Survey;
-use App\SurveyQuestion;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -16,8 +15,7 @@ class SurveyController extends Controller
      */
     public function index()
     {
-        $surveys   = Survey::orderBy('id', 'asc')->get();
-        $questions = SurveyQuestion::all();
+        $surveys = Survey::all();
 
         return view('surveys.index')->with('surveys', $surveys);
     }
@@ -61,10 +59,11 @@ class SurveyController extends Controller
      *
      * @return Factory|View
      */
-    public function show($id)
+    public function show(Request $request)
     {
+
         return view('surveys.show',
-            ['survey' => Survey::with('questions')->findOrFail($id)]);
+            ['survey' => Survey::with('questions')->findOrFail(1)]);
     }
 
     /**

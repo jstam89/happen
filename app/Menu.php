@@ -20,8 +20,8 @@ class Menu extends Model
             'takeout_date',
         ];
 
-    public function order()
+    public function orders()
     {
-        return $this->belongsToMany(Order::class);
+        return $this->belongsTo(Order::class);
     }
 }

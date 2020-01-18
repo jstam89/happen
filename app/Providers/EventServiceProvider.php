@@ -19,8 +19,7 @@ class EventServiceProvider extends ServiceProvider
             NewUserHasRegistered::class => [
                 WelcomeNewUserListener::class,
             ],
-            SocialiteWasCalled::class        => [
-                // add your listeners (aka providers) here
+            SocialiteWasCalled::class   => [
                 'SocialiteProviders\\Graph\\GraphExtendSocialite@handle',
             ],
         ];

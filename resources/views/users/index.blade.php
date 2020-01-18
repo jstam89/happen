@@ -12,8 +12,6 @@
                         <div class="col-4 text-right">
                             <a href="{{ route('user.create') }}"
                                class="btn btn-sm btn-primary">{{ __('Toevoegen') }}</a>
-                            <a href="#"
-                               class="btn btn-sm btn-secondary">{{ __('Filter') }}</a>
                         </div>
                     </div>
                 </div>

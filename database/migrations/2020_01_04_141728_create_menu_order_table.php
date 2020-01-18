@@ -15,9 +15,9 @@ class CreateMenuOrderTable extends Migration
     {
         Schema::create('menu_order', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('menu_id');
-            $table->unsignedBigInteger('order_id');
-            $table->unsignedInteger('quantity');
+            $table->BigInteger('menu_id')->unsigned();
+            $table->BigInteger('order_id')->unsigned();
+            $table->Integer('quantity')->unsigned();
 
             $table->unique(['menu_id', 'order_id']);
         });

@@ -4,9 +4,6 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * @method static find(int $int)
- */
 class Order extends Model
 {
     /**
@@ -18,8 +15,8 @@ class Order extends Model
         = [
             'menu_id',
             'user_id',
-            'quantity',
-            'ordered_at'
+            'ordered_at',
+            'quantity'
         ];
 
     public function user()
@@ -27,8 +24,8 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function menus()
+    public function menu()
     {
-        return $this->belongsToMany(Menu::class);
+        return $this->hasOne(Menu::class);
     }
 }

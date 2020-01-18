@@ -6,8 +6,8 @@
         <div class="table-responsive">
             <table class="table tablesorter" id="">
                 <thead class=" text-primary">
-                <th scope="col">{{ __('ID') }}</th>
-                <th scope="col">{{ __('Naam') }}</th>
+                <th scope="col">{{ __('Order id') }}</th>
+                <th scope="col">{{ __('Door') }}</th>
                 <th scope="col">{{ __('Besteld op') }}</th>
                 </thead>
                 <tbody>
