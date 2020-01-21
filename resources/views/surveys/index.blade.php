@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
                     <h2 class="card-title menu-title">{{ __('Surveys') }}</h2>
@@ -21,18 +21,24 @@
                         <button class="btn btn-primary" type="submit">Selecteren</button>
                     </form>
                 </div>
-
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
-                    <h2 class="card-title menu-title">{{ __('Questions') }}</h2>
+                    <h2 class="card-title menu-title">{{ __('Vragen') }}</h2>
                 </div>
                 <div class="card-body">
+                    @foreach($survey->questions as $question)
+                        <li class="list-group text-light pb-3">{{$question->question}}</li>
+                    @endforeach
+
+                    <input type="text" class="form-control" value="Voeg een vraag toe..">
+                    <button class="btn" type="submit">Toevoegen</button>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 @endsection
 

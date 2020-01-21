@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\PasswordRequest;
-use App\Http\Requests\ProfileRequest;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
@@ -12,41 +12,42 @@ class ProfileController extends Controller
     /**
      * Show the form for editing the profile.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function edit()
     {
         $orders = auth()->user()->orders()->get();
 
-        return view('profile.edit', compact('orders'));
+        return view('profile.edit')->with('orders', $orders);
     }
 
     /**
      * Update the profile
      *
-     * @param \App\Http\Requests\ProfileRequest $request
+     * @param $request
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    public function update(ProfileRequest $request)
+    public function update($request)
     {
         auth()->user()->update($request->all());
 
-        return back()->withStatus(__('Profile successfully updated.'));
+        return back()->withStatus('Profiel is aangepast');
     }
 
     /**
      * Change the password
      *
-     * @param PasswordRequest $request
+     * @param $request
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    public function password(PasswordRequest $request)
+    public function password($request)
     {
-        auth()->user()
-              ->update(['password' => Hash::make($request->get('password'))]);
+        $request->user()->fill([
+            'password' => Hash::make($request->get('password'))
+        ])->save();
 
-        return back()->withPasswordStatus(__('Password successfully updated.'));
+        return back()->withPasswordStatus('Wachtwoord is veranderd');
     }
 }

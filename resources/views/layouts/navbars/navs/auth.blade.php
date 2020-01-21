@@ -35,7 +35,6 @@
                         <notification-bar>
                         </notification-bar>
                     </div>
-
                 </li>
                 <li class="dropdown nav-item">
                     <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">

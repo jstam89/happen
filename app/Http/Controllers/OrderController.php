@@ -5,12 +5,10 @@ namespace App\Http\Controllers;
 use App\Events\OrderConfirmed;
 use App\Menu;
 use App\Order;
-use Carbon\Carbon;
 use Exception;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\View\View;
 
 class OrderController extends Controller
@@ -30,8 +28,7 @@ class OrderController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     *
-     * @return Factory|View
+     * @return void
      */
     public function create()
     {
@@ -47,11 +44,10 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        $order             = new Order();
-        $order->user_id    = auth()->user()->id;
-        $order->menu_id    = '1';
-        $order->quantity   = '5';
-        $order->ordered_at = Carbon::now();
+        $order           = new Order();
+        $order->user_id  = auth()->user()->id;
+        $order->menu_id  = '1';
+        $order->quantity = '1';
         $order->save();
 
         OrderConfirmed::dispatch($order);
@@ -64,6 +60,7 @@ class OrderController extends Controller
      * Display the specified resource.
      *
      * @return Factory|View
+     *
      * @throws Exception
      */
     public function show()
@@ -79,10 +76,11 @@ class OrderController extends Controller
      *
      * @param int $id
      *
-     * @return Response
+     * @return void
      */
     public function edit($id)
     {
+
         die('order met id: ' . $id . ' aanpassen');
     }
 
@@ -92,7 +90,7 @@ class OrderController extends Controller
      * @param Request $request
      * @param int     $id
      *
-     * @return Response
+     * @return void
      */
     public function update(Request $request, $id)
     {
@@ -105,18 +103,16 @@ class OrderController extends Controller
      * @param Order $order
      *
      * @return void
+     *
      * @throws Exception
      */
     public function destroy(Order $order)
     {
-        //check of de request van gebruiker komt of van de admin
-        //als van gebruiker redirect to profile
-        //als van admin redirect naar order overzicht
         $order->delete();
 
-        return redirect()->route('orders.manage')
-                         ->withStatus(__('Order succesvol verwijderd.'));
+        return back()->withStatus(__('Order succesvol geannuleerd'));
     }
+
 
     public function saveSession(Request $request)
     {

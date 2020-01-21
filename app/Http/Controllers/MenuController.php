@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection ALL */
 
 namespace App\Http\Controllers;
 
@@ -55,22 +55,19 @@ class MenuController extends Controller
 
             $fileNameToStore = $filename . '_' . time() . '.' . $extension;
 
-            $path = $request->file('menu_image')
-                            ->storeAs('public/menu_images', $fileNameToStore);
-
         } else {
 
             $fileNameToStore = 'noimage.jpg';
         }
 
+        Menu::create([
+            'title'        => $request->title,
+            'info'         => $request->info,
+            'takeout_date' => $request->takeout_date,
+            'menu_image'   => $fileNameToStore,
 
-        $menu               = new Menu;
-        $menu->title        = $request->input('title');
-        $menu->info         = $request->input('info');
-        $menu->takeout_date = $request->input('takeout_date');
-        $menu->menu_image   = $fileNameToStore;
 
-        $menu->save();
+        ]);
 
         return redirect('/toevoegen')->withStatus('success', 'Menu Toegevoegd');
     }
@@ -92,6 +89,7 @@ class MenuController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
+     *
      * @param int     $id
      *
      * @return Response

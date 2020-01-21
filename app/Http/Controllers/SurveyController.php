@@ -39,23 +39,21 @@ class SurveyController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->all();
-
-        $survey           = new Survey();
-        $survey->name     = $input['name'];
-        $survey->type     = $input['type'];
-        $survey->isActive = $input['isActive'] === 'on';
-        $survey->save();
+        Survey::create([
+            'name'     => $request->name,
+            'type'     => $request->type,
+            'isActive' => $request->isActive === 'on',
+        ]);
 
         return redirect()->route('survey.index')
-                         ->withStatus(__('Survey toegevoegd.'));
+                         ->withStatus('Survey toegevoegd.');
 
     }
 
     /**
      * Display the specified resource.
      *
-     * @param $id
+     * @param Request $request
      *
      * @return Factory|View
      */
@@ -63,6 +61,7 @@ class SurveyController extends Controller
     {
 
         return view('surveys.show',
+
             ['survey' => Survey::with('questions')->findOrFail(1)]);
     }
 
@@ -82,6 +81,7 @@ class SurveyController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
+     *
      * @param Survey  $survey
      *
      * @return void

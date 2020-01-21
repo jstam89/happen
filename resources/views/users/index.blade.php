@@ -57,7 +57,7 @@
                                                         </a>
 
                                                         <button type="button" class="dropdown-item"
-                                                                onclick="confirm('{{ __("Are you sure you want to delete this user?") }}') ? this.parentElement.submit() : ''">
+                                                                onclick="confirm('{{ __("Weet je zeker dat je deze gebruiker wil verwijderen?") }}') ? this.parentElement.submit() : ''">
                                                             {{ __('Verwijderen') }}
                                                         </button>
                                                     </form>

@@ -6,7 +6,6 @@ use App\Reservation;
 use Exception;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\View\View;
 
 class ReservationController extends Controller
@@ -18,11 +17,9 @@ class ReservationController extends Controller
      */
     public function index()
     {
-
-        $reservations = Reservation::orderBy('id')->get();
+        $reservations = Reservation::all();
 
         return view('reservation.index')->with('reservations', $reservations);
-
     }
 
     /**
@@ -30,38 +27,36 @@ class ReservationController extends Controller
      *
      * @param Request $request
      *
-     * @return void
+     * @return
      */
     public function create(Request $request)
     {
-
         $date = $request->input('reserved_date');
 
         if ( ! $date) {
 
-            return redirect('/reservation')->withStatus('Kies een datum');
+            return redirect()->route('reservation.index')
+                             ->withStatus('Kies een datum');
 
         }
 
-        $reservation                = new Reservation();
-        $reservation->quantity      = $request->input('quantity');
-        $reservation->reserved_date = $request->input('reserved_date');
-        $reservation->user_id       = $request->user()->id;
-
-        $reservation->save();
+        Reservation::create([
+            'quantity'      => $request->quantity,
+            'reserved_date' => $request->reserved_date,
+            'user_id'       => $request->user()->id,
+        ]);
 
         return redirect()->route('reservation.index')
-                         ->withStatus(__('Tafel is gereserveerd.'));
-
+                         ->withStatus('Tafel is gereserveerd');
 
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      *
-     * @return Response
+     * @return void
      */
     public function store(Request $request)
     {
@@ -75,11 +70,9 @@ class ReservationController extends Controller
      */
     public function show()
     {
-
         $reservations = Reservation::with('user')->get();
 
         return view('reservation.manage')->with('reservations', $reservations);
-
     }
 
     /**
@@ -87,7 +80,7 @@ class ReservationController extends Controller
      *
      * @param Reservation $reservation
      *
-     * @return Response
+     * @return void
      */
     public function edit(Reservation $reservation)
     {
@@ -97,10 +90,10 @@ class ReservationController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param Reservation              $reservation
+     * @param Request     $request
+     * @param Reservation $reservation
      *
-     * @return Response
+     * @return void
      */
     public function update(Request $request, Reservation $reservation)
     {
@@ -112,7 +105,7 @@ class ReservationController extends Controller
      *
      * @param Reservation $reservation
      *
-     * @return Response
+     * @return
      * @throws Exception
      */
     public function destroy(Reservation $reservation)
@@ -120,6 +113,6 @@ class ReservationController extends Controller
         $reservation->delete();
 
         return redirect()->route('reservations.manage')
-                         ->withStatus(__('Reservering succesvol verwijderd.'));
+                         ->withStatus('Reservering succesvol verwijderd');
     }
 }

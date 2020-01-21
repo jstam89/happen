@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use App\SurveyQuestion;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class SurveyQuestionController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -20,7 +21,7 @@ class SurveyQuestionController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -31,7 +32,7 @@ class SurveyQuestionController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -41,8 +42,9 @@ class SurveyQuestionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\SurveyQuestion  $surveyQuestion
-     * @return \Illuminate\Http\Response
+     * @param SurveyQuestion $surveyQuestion
+     *
+     * @return Response
      */
     public function show(SurveyQuestion $surveyQuestion)
     {
@@ -52,8 +54,9 @@ class SurveyQuestionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\SurveyQuestion  $surveyQuestion
-     * @return \Illuminate\Http\Response
+     * @param SurveyQuestion $surveyQuestion
+     *
+     * @return Response
      */
     public function edit(SurveyQuestion $surveyQuestion)
     {
@@ -64,8 +67,9 @@ class SurveyQuestionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\SurveyQuestion  $surveyQuestion
-     * @return \Illuminate\Http\Response
+     * @param SurveyQuestion  $surveyQuestion
+     *
+     * @return Response
      */
     public function update(Request $request, SurveyQuestion $surveyQuestion)
     {
@@ -75,8 +79,9 @@ class SurveyQuestionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\SurveyQuestion  $surveyQuestion
-     * @return \Illuminate\Http\Response
+     * @param SurveyQuestion  $surveyQuestion
+     *
+     * @return Response
      */
     public function destroy(SurveyQuestion $surveyQuestion)
     {

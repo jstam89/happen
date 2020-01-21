@@ -160,9 +160,9 @@
                                                 @method('delete')
 
                                                 <a class="dropdown-item"
-                                                   href="{{ route('order.edit', $order) }}">{{ __('Edit') }}</a>
+                                                   href="{{ route('order.edit', $order) }}">{{ __('Bewerken') }}</a>
                                                 <button type="button" class="dropdown-item"
-                                                        onclick="confirm('{{ __("Are you sure you want to delete this menu?") }}') ? this.parentElement.submit() : ''">
+                                                        onclick="confirm('{{ __("Weet je zeker dat je dit menu wilt verwijderen?") }}') ? this.parentElement.submit() : ''">
                                                     {{ __('Annuleren') }}
                                                 </button>
                                             </form>
@@ -174,12 +174,10 @@
                                 </div>
                             </td>
                         </tr>
-
                     @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-
 @endsection

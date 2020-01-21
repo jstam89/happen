@@ -47,11 +47,6 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
         ];
 
-    private $password;
-    private $email;
-    private $name;
-    private $id;
-
     public function orders()
     {
         return $this->hasMany(Order::class);

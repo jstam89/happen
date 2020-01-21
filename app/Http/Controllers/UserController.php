@@ -4,11 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Events\NewUserHasRegistered;
 use App\Http\Requests\UserRequest;
-use App\Providers\EventServiceProvider;
 use App\User;
 use Exception;
-use Illuminate\Console\Scheduling\Event;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -29,6 +26,25 @@ class UserController extends Controller
     }
 
     /**
+     * Store a newly created user in storage
+     *
+     * @param Request $request
+     * @param User    $model
+     *
+     * @return
+     */
+    public function store(Request $request, User $model)
+    {
+        $model->create($request->merge(['password' => Hash::make($request->get('password'))])
+                               ->all());
+
+        NewUserHasRegistered::dispatch($request->all());
+
+        return redirect()->route('user.index')
+                         ->withStatus('Gebruiker succesvol geregistreerd');
+    }
+
+    /**
      * Show the form for creating a new user
      *
      * @return View
@@ -39,46 +55,28 @@ class UserController extends Controller
     }
 
     /**
-     * Store a newly created user in storage
-     *
-     * @param Request $request
-     * @param User    $model
-     *
-     * @return
-     */
-    public function store(Request $request, User $model)
-    {
-        $user = $request->all();
-
-        $model->create($request->merge(['password' => Hash::make($request->get('password'))])
-                               ->all());
-
-        NewUserHasRegistered::dispatch($user);
-
-        return redirect()->route('user.index')
-                         ->withStatus('Gebruiker succesvol geregistreerd');
-    }
-
-    /**
      * Show the form for editing the specified user
      *
      * @param User $user
      *
-     * @return Factory|View
+     * @return RedirectResponse
      */
     public function edit(User $user)
     {
         if ($user->id === 1) {
+
             return redirect()->route('user.index');
+
         }
 
-        return view('users.edit', compact('user'));
+        return view('users.edit')->with('user', $user);
     }
 
     /**
      * Update the specified user in storage
      *
      * @param UserRequest $request
+     *
      * @param User        $user
      *
      * @return RedirectResponse
@@ -92,7 +90,7 @@ class UserController extends Controller
                     ));
 
         return redirect()->route('user.index')
-                         ->withStatus('Gebruiker succesvol geupdate');
+                         ->withStatus('Gebruiker succesvol bijgewerkt');
     }
 
     /**
@@ -101,17 +99,20 @@ class UserController extends Controller
      * @param User $user
      *
      * @return void
+     *
      * @throws Exception
      */
     public function destroy(User $user)
     {
         if ($user->id === 1) {
+
             return abort(403);
+
         }
 
         $user->delete();
 
         return redirect()->route('user.index')
-                         ->withStatus(__('Gebruiker succesvol verwijderd.'));
+                         ->withStatus('Gebruiker succesvol verwijderd');
     }
 }
