@@ -16,7 +16,7 @@ class UsersTableSeeder extends Seeder
         $users = [
             [
                 'name'  => 'Admin',
-                'email' => 'dem@demo.nl'
+                'email' => 'demo@demo.nl'
             ],
         ];
 
