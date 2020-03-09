@@ -39,12 +39,6 @@
                         <div class="col-8">
                             <h4 class="card-title">{{ __('Reserveringen') }}</h4>
                         </div>
-                        <div class="col-4 text-right">
-                            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
-                                    data-target="#OrderModal">
-                                {{ __('Filter') }}
-                            </button>
-                        </div>
                     </div>
                 </div>
                 <div class="card-body">

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\OrderConfirmed;
 use App\Menu;
 use App\Order;
 use Exception;
@@ -44,13 +43,21 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        $order           = new Order();
-        $order->user_id  = auth()->user()->id;
-        $order->menu_id  = '1';
-        $order->quantity = '1';
-        $order->save();
+        $results = $request->json()->all();
 
-        OrderConfirmed::dispatch($order);
+        foreach ($results as $key => $result) {
+            foreach ($result as $menu) {
+
+                $order           = new Order();
+                $order->user_id  = auth()->user()->id;
+                $order->menu_id  = $menu['id'];
+                $order->quantity = $menu['quantity'];
+                $order->save();
+
+            }
+        }
+
+        //OrderConfirmed::dispatch($result);
 
         return response()->json('Uw menu is besteld', 201);
     }
@@ -65,7 +72,6 @@ class OrderController extends Controller
      */
     public function show()
     {
-
         $orders = Order::with('user')->get();
 
         return view('order.manage')->with('orders', $orders);

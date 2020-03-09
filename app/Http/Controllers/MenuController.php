@@ -31,7 +31,6 @@ class MenuController extends Controller
      *
      * @param Request $request
      *
-     * @return false|string
      * @throws ValidationException
      */
     public function store(Request $request)
@@ -86,6 +85,21 @@ class MenuController extends Controller
     }
 
     /**
+     * Remove the specified resource from storage.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function destroy($id)
+    {
+        $menu = Menu::all()->find($id);
+        $menu->delete();
+
+        return back()->withStatus('Menu succesvol verwijderd');
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param Request $request
@@ -99,15 +113,4 @@ class MenuController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     *
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

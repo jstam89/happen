@@ -15,13 +15,9 @@ class UsersTableSeeder extends Seeder
     {
         $users = [
             [
-                'name' => 'Jeremy Stam',
-                'email' => 'jer.stam89@gmail.com'
+                'name'  => 'Admin',
+                'email' => 'dem@demo.nl'
             ],
-            [
-                'name' => 'User',
-                'email' => 'user@gmail.com'
-            ]
         ];
 
         foreach ($users as $user) {

@@ -51,10 +51,6 @@
                 </div>
             </div>
         </form>
-        <form class="msgraph-btn" method="post" action="{{ route('oauth.register') }}">
-            @csrf
-            <button type="submit" class="btn btn-sm text-center">{{ __('Microsoft inloggen') }}</button>
-        </form>
     </div>
     <div>
 

@@ -71,12 +71,12 @@
                                             <i class="fas fa-ellipsis-v"></i>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                            <form action="" method="post">
+                                            <form action="{{ route('menus.destroy', $menu) }}" method="post">
                                                 @csrf
                                                 @method('delete')
 
                                                 <a class="dropdown-item"
-                                                   href="{{route('menus.edit')}}">{{ __('Bewerken') }}
+                                                   href="{{ route('menus.edit', $menu) }}">{{ __('Bewerken') }}
                                                 </a>
 
                                                 <button type="button" class="dropdown-item"

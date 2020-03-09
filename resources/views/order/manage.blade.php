@@ -63,12 +63,13 @@
                         </thead>
                         <tbody>
                         @foreach ($orders as $order)
+
                             <tr>
                                 <td>{{$order->id}}</td>
                                 <td>{{$order->user->name}}</td>
+                                <td>menu naam</td>
                                 <td>{{$order->quantity}}</td>
-                                <td></td>
-                                <td></td>
+                                <td>menu afhaaldatum</td>
                                 <td class="text-right">
                                     <div class="dropdown">
                                         <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"

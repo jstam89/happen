@@ -41,7 +41,7 @@ Route::group(['middleware' => 'auth'], function () {
         ]);
 });
 
-//User routes
+
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('user', 'UserController');
 
