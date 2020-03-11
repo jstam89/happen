@@ -9,6 +9,9 @@
             <div class="card card-login card-wizard">
                 <div class="card-header">
                     <h1 class="card-title text-white">{{ __('Log in') }}</h1>
+                    <p>{{ __('email: demo@demo.nl') }}</p>
+                    <p>{{ __('pass: secret') }}</p>
+
                 </div>
                 <div class="card-body">
 
