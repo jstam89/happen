@@ -9,9 +9,6 @@
             <div class="card card-login card-wizard">
                 <div class="card-header">
                     <h1 class="card-title text-white">{{ __('Log in') }}</h1>
-                    <p>{{ __('email: demo@demo.nl') }}</p>
-                    <p>{{ __('pass: secret') }}</p>
-
                 </div>
                 <div class="card-body">
 
@@ -37,6 +34,8 @@
                         @include('alerts.feedback', ['field' => 'password'])
                     </div>
                 </div>
+                <p>{{ __('email: demo@demo.nl') }}</p>
+                    <p>{{ __('pass: secret') }}</p>
                 <div class="card-footer">
                     <button type="submit" href=""
                             class="btn btn-primary btn-lg btn-block mb-3">{{ __('Get Started') }}</button>
