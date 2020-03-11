@@ -23,12 +23,12 @@
                     <p>{{ __('Tafel Reserveren') }}</p>
                 </a>
             </li>
-            <li @if ($pageSlug ?? '' == 'survey') class="active " @endif>
+            <!-- <li @if ($pageSlug ?? '' == 'survey') class="active " @endif>
                 <a href="{{ route('survey.index')  }}">
                     <i class="tim-icons icon-single-02"></i>
                     <p>{{ __('Survey Beheer') }}</p>
                 </a>
-            </li>
+            </li> -->
             <li @if ($pageSlug ?? '' == 'menus') class="active " @endif>
                 <a href="{{ route('menus.create')  }}">
                     <i class="tim-icons icon-single-02"></i>
