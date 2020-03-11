@@ -33,9 +33,9 @@
                                class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}">
                         @include('alerts.feedback', ['field' => 'password'])
                     </div>
-                </div>
-                <p>{{ __('email: demo@demo.nl') }}</p>
+                    <p>{{ __('email: demo@demo.nl') }}</p>
                     <p>{{ __('pass: secret') }}</p>
+                </div>
                 <div class="card-footer">
                     <button type="submit" href=""
                             class="btn btn-primary btn-lg btn-block mb-3">{{ __('Get Started') }}</button>
