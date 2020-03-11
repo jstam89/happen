@@ -32,8 +32,9 @@
                             </div>
                         </form>
                     </div>
+                    </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-6">
                 <div class="card">
                     <div class="card-header">
                         <h2 class="card-title menu-title">{{ __('Selecteren') }}</h2>
