@@ -63,7 +63,7 @@
 <!--  Notifications Plugin    -->
 <script src="{{ asset('black') }}/js/black-dashboard.min.js?v=1.0.0"></script>
 <script src="{{ asset('black') }}/js/theme.js"></script>
-<script src="{{ mix('/public/js/app.js') }}" defer></script>
+<script src="{{ mix('/js/app.js') }}" defer></script>
 
 
 @stack('js')
